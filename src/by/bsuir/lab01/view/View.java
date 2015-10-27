@@ -22,7 +22,7 @@ public class View {
 
         do {
             try {
-                ConsoleHelper.write("Enter your login and password!");
+                ConsoleHelper.write("Enter your login and password:");
                 LoginRequest request = new LoginRequest();
                 request.setUserData(ConsoleHelper.read());
                 request.setCommandName(CommandName.LOGIN_USER.toString());
@@ -63,12 +63,13 @@ public class View {
                 case SHOW_BOOKS: showBooks(commandName); break;
                 case ADD_NEW_BOOK: addNewBook(commandName);break;
                 case REMOVE_BOOK: removeBook(commandName);break;
+                case FIND_BOOK: findBook(commandName);break;
+                default:
             }
         } while (commandName != CommandName.EXIT);
     }
 
     public CommandName getUsersCommandName() throws IOException {
-        ConsoleHelper.write("");
         ConsoleHelper.write(String.format("\t %d - show all books", CommandName.SHOW_BOOKS.ordinal()));
         ConsoleHelper.write(String.format("\t %d - find books by author", CommandName.FIND_BOOK.ordinal()));
         ConsoleHelper.write(String.format("\t %d - exit", CommandName.EXIT.ordinal()));
@@ -83,16 +84,15 @@ public class View {
     }
 
     public CommandName getAdminsCommandName() throws IOException {
-        ConsoleHelper.write("");
+        ConsoleHelper.write(String.format("\t %d -- show all books", CommandName.SHOW_BOOKS.ordinal()));
+        ConsoleHelper.write(String.format("\t %d -- find books by author", CommandName.FIND_BOOK.ordinal()));
         ConsoleHelper.write(String.format("\t %d -- add new book", CommandName.ADD_NEW_BOOK.ordinal()));
         ConsoleHelper.write(String.format("\t %d -- remove book", CommandName.REMOVE_BOOK.ordinal()));
-        ConsoleHelper.write(String.format("\t %d -- find books by author", CommandName.FIND_BOOK.ordinal()));
-        ConsoleHelper.write(String.format("\t %d -- show all books", CommandName.SHOW_BOOKS.ordinal()));
         ConsoleHelper.write(String.format("\t %d -- exit", CommandName.EXIT.ordinal()));
 
         int commandNumber = ConsoleHelper.readInt();
         while (commandNumber > CommandName.values().length - 1) {
-            ConsoleHelper.write("Wrong number of command");
+            ConsoleHelper.write("Enter correct number of command:");
             commandNumber = ConsoleHelper.readInt();
         }
         return CommandName.values()[commandNumber];
@@ -108,10 +108,11 @@ public class View {
         }else {
             ShowBooksResponse viewBooksResponse = (ShowBooksResponse) response;
             List<Book> books = viewBooksResponse.getBooks();
-            ConsoleHelper.write("----------LIST OF BOOKS:---------");
+            ConsoleHelper.write("---------------LIST OF BOOKS:--------------");
             for (Book book : books) {
-                ConsoleHelper.write(book.getTitle() + " - " + book.getAuthor());
+                ConsoleHelper.write("Title: " + book.getTitle() + " - " + "Author: " + book.getAuthor());
             }
+            ConsoleHelper.write("-------------------------------------------");
         }
     }
 
@@ -120,9 +121,10 @@ public class View {
         request.setCommandName(commandName.toString());
 
         try {
+            ConsoleHelper.write("Enter title and author of book:");
             request.setTitle(ConsoleHelper.read());
         } catch (IOException e) {
-            ConsoleHelper.write("Try to enter correct value " + e);
+            ConsoleHelper.write("Enter correct title " + e);
         }
         Response response = controller.executeRequest(request);
         if(response.getErrorMessage() != null)
@@ -138,9 +140,10 @@ public class View {
         NewBookRequest request = new NewBookRequest();
         request.setCommandName(commandName.toString());
         try {
+            ConsoleHelper.write("Enter title and author of book:");
             request.setTitle(ConsoleHelper.read());
         } catch (IOException e) {
-            ConsoleHelper.write("Try to enter correct value " + e);
+            ConsoleHelper.write("Enter correct title " + e);
         }
 
         Response response = controller.executeRequest(request);
@@ -151,6 +154,29 @@ public class View {
             ConsoleHelper.write(newBookResponse.getResultMessage());
         }
 
+    }
+
+    public void findBook(CommandName commandName){
+        ConsoleHelper.write("Enter author of book:");
+        FindBookRequest request = new FindBookRequest();
+        request.setCommandName(commandName.toString());
+
+        try {
+            request.setAuthor(ConsoleHelper.read());
+        } catch (IOException e) {
+            ConsoleHelper.write("Enter correct author " + e);
+        }
+
+        Response response = controller.executeRequest(request);
+        if (response.getErrorMessage() != null)
+            ConsoleHelper.write(response.getErrorMessage());
+        else {
+            FindBookResponse findBookResponse = (FindBookResponse) response;
+            for(Book book : findBookResponse.getBooks()){
+                ConsoleHelper.write("Title: " + book.getTitle() + " - " + "Author: " + book.getAuthor());
+            }
+
+        }
     }
 }
 

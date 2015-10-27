@@ -1,9 +1,6 @@
 package by.bsuir.lab01.controller.command;
 
-import by.bsuir.lab01.controller.command.impl.AddNewBookCommand;
-import by.bsuir.lab01.controller.command.impl.LoginUserCommand;
-import by.bsuir.lab01.controller.command.impl.RemoveBookCommand;
-import by.bsuir.lab01.controller.command.impl.ShowBooksCommand;
+import by.bsuir.lab01.controller.command.impl.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +13,7 @@ public final class CommandHelper {
 		commands.put(CommandName.LOGIN_USER, new LoginUserCommand());
         commands.put(CommandName.SHOW_BOOKS, new ShowBooksCommand());
         commands.put(CommandName.REMOVE_BOOK, new RemoveBookCommand());
+        commands.put(CommandName.FIND_BOOK, new FindBookCommand());
 	}	
 	
 	public Command getCommand(String commandName){
