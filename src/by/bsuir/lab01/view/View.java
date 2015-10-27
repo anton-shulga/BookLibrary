@@ -62,13 +62,14 @@ public class View {
             switch (commandName) {
                 case SHOW_BOOKS: showBooks(commandName); break;
                 case ADD_NEW_BOOK: addNewBook(commandName);break;
+                case REMOVE_BOOK: removeBook(commandName);break;
             }
         } while (commandName != CommandName.EXIT);
     }
 
     public CommandName getUsersCommandName() throws IOException {
         ConsoleHelper.write("");
-        ConsoleHelper.write(String.format("\t %d - view all books in the library", CommandName.SHOW_BOOKS.ordinal()));
+        ConsoleHelper.write(String.format("\t %d - show all books", CommandName.SHOW_BOOKS.ordinal()));
         ConsoleHelper.write(String.format("\t %d - find books by author", CommandName.FIND_BOOK.ordinal()));
         ConsoleHelper.write(String.format("\t %d - exit", CommandName.EXIT.ordinal()));
 
@@ -107,10 +108,28 @@ public class View {
         }else {
             ShowBooksResponse viewBooksResponse = (ShowBooksResponse) response;
             List<Book> books = viewBooksResponse.getBooks();
-            ConsoleHelper.write("All books:");
-           for (Book book : books) {
-               ConsoleHelper.write(book.getTitle() + " - " + book.getAuthor());
+            ConsoleHelper.write("----------LIST OF BOOKS:---------");
+            for (Book book : books) {
+                ConsoleHelper.write(book.getTitle() + " - " + book.getAuthor());
             }
+        }
+    }
+
+    public void removeBook(CommandName commandName){
+        RemoveBookRequest request = new RemoveBookRequest();
+        request.setCommandName(commandName.toString());
+
+        try {
+            request.setTitle(ConsoleHelper.read());
+        } catch (IOException e) {
+            ConsoleHelper.write("Try to enter correct value " + e);
+        }
+        Response response = controller.executeRequest(request);
+        if(response.getErrorMessage() != null)
+            ConsoleHelper.write(response.getErrorMessage());
+        else {
+            RemoveBookResponse removeBookResponse = (RemoveBookResponse) response;
+            ConsoleHelper.write(removeBookResponse.getResultMessage());
         }
     }
 
@@ -121,7 +140,7 @@ public class View {
         try {
             request.setTitle(ConsoleHelper.read());
         } catch (IOException e) {
-            e.printStackTrace();
+            ConsoleHelper.write("Try to enter correct value " + e);
         }
 
         Response response = controller.executeRequest(request);

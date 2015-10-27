@@ -1,4 +1,3 @@
-amama amam
-ghghg hghgh
-kakaka kakakak
-j j
+1 1
+2 2
+5 5

@@ -4,8 +4,8 @@ import by.bsuir.lab01.bean.NewBookRequest;
 import by.bsuir.lab01.bean.NewBookResponse;
 import by.bsuir.lab01.bean.Request;
 import by.bsuir.lab01.bean.Response;
-import by.bsuir.lab01.controller.command.CommandException;
 import by.bsuir.lab01.controller.command.Command;
+import by.bsuir.lab01.controller.command.CommandException;
 import by.bsuir.lab01.service.ModificationRepositoryService;
 import by.bsuir.lab01.service.ServiceException;
 
@@ -31,7 +31,7 @@ public class AddNewBookCommand implements Command {
 		// create RESPONSE
 		NewBookResponse response = new NewBookResponse();
 		if (result) {
-			response.setResultMessage("All OK.");
+			response.setResultMessage("Success.");
 		} else {
 			response.setErrorMessage("Can't add the book.");
 		}
@@ -39,7 +39,11 @@ public class AddNewBookCommand implements Command {
 	}
 
 	private boolean validationParameters(Request request) {
-		return true;
+
+        NewBookRequest newBookRequest = (NewBookRequest) request;
+        if(newBookRequest.getTitle().split(" ").length == 2) return true;
+        else
+            return false;
 	}
 
 }

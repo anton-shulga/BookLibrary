@@ -14,7 +14,18 @@ public final class ModificationRepositoryService {
 		try {
 			return modificationDao.addNewBook(title);
 		} catch (DaoException ex) {
-			throw new ServiceException("Service Exception Me7ssage", ex);
+			throw new ServiceException("Service exception ", ex);
 		}
 	}
+
+    public static boolean removeBookService(String title) throws ServiceException {
+        DaoFactory daoFactory = DaoFactory.getDaoFactory();
+        ModificationDao modificationDao = daoFactory.getModificationDao();
+
+        try {
+            return modificationDao.removeBook(title);
+        } catch (DaoException ex) {
+            throw new ServiceException("Service exception", ex);
+        }
+    }
 }

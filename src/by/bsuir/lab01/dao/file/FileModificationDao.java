@@ -4,9 +4,7 @@ import by.bsuir.lab01.dao.DaoException;
 import by.bsuir.lab01.dao.ModificationDao;
 import by.bsuir.lab01.helper.FileHelper;
 
-import java.io.IOError;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public final class FileModificationDao implements ModificationDao {
@@ -34,5 +32,23 @@ public final class FileModificationDao implements ModificationDao {
         }
 		return true;
 	}
+
+    public boolean removeBook(String title) throws DaoException {
+
+        try {
+            List<String> stringBooks = FileHelper.readAllFile(fileName);
+            for(String stringBook : stringBooks){
+                if(stringBook.equals(title))
+                    stringBooks.remove(stringBooks.indexOf(stringBook));
+                break;
+            }
+            FileHelper.clearFile(fileName);
+            for (String stringBook : stringBooks)
+                FileHelper.append(fileName, stringBook);
+        }catch (IOException e){
+            throw new DaoException("Dao exception", e);
+        }
+        return true;
+    }
 
 }

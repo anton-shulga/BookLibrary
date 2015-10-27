@@ -1,7 +1,5 @@
 package by.bsuir.lab01.helper;
 
-import by.bsuir.lab01.dao.DaoException;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +21,27 @@ public class FileHelper {
             try {
                 out.write(text);
                 out.write("\n");
+            } finally {
+                out.close();
+            }
+        } catch(IOException e) {
+            throw new IOException(e);
+        }
+    }
+
+
+    public static void clearFile(String fileName) throws IOException {
+        File file = new File(fileName);
+
+        try {
+            //проверяем, что если файл не существует то создаем его
+            if(!file.exists()){
+                file.createNewFile();
+            }
+            PrintWriter out = new PrintWriter(new OutputStreamWriter(new FileOutputStream(fileName, false)));
+
+            try {
+                out.write("");
             } finally {
                 out.close();
             }
