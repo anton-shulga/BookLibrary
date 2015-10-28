@@ -6,7 +6,7 @@ import by.bsuir.lab01.dao.file.ShowBooksDao;
 import by.bsuir.lab01.dao.file.property.PropertiesLoader;
 
 public abstract class DaoFactory {
-	private static final String DAO_TYPE = "file";          //you must read it from property file
+	private static final String DAO_TYPE =  new PropertiesLoader().getDaoType();          //you must read it from property file
 	
 	public static DaoFactory getDaoFactory(){
 		switch (DAO_TYPE){

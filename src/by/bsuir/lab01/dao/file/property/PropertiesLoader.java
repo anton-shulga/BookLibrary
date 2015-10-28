@@ -10,8 +10,9 @@ import java.util.Properties;
  */
 public class PropertiesLoader  {
     private static final String PROPERTIES_FILE_PATH = "resources/config/config.properties";
-    private static Properties properties;
     private InputStream inputStream;
+    private static Properties properties;
+
 
     {
         try {

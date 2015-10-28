@@ -1,6 +1,7 @@
 package by.bsuir.lab01.dao.file;
 
 import by.bsuir.lab01.dao.DaoException;
+import by.bsuir.lab01.dao.file.property.PropertiesLoader;
 import by.bsuir.lab01.entity.Book;
 import by.bsuir.lab01.helper.FileHelper;
 
@@ -15,7 +16,7 @@ public class FileShowBooksDao implements ShowBooksDao {
     private static final FileShowBooksDao instance = new FileShowBooksDao();
     private List<String> books =  new ArrayList<>();
     private List<Book> response = new ArrayList<>();
-    private static String userDataFilePath = "src/resources/data/books.txt";
+    private static String userDataFilePath = new PropertiesLoader().getBooksFilePath();
 
     private FileShowBooksDao(){}
 

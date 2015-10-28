@@ -2,6 +2,7 @@ package by.bsuir.lab01.dao.file;
 
 import by.bsuir.lab01.dao.DaoException;
 import by.bsuir.lab01.dao.FindDao;
+import by.bsuir.lab01.dao.file.property.PropertiesLoader;
 import by.bsuir.lab01.entity.Book;
 import by.bsuir.lab01.helper.FileHelper;
 
@@ -11,7 +12,7 @@ import java.util.List;
 
 public final class FileFindDao implements FindDao {
 	private final static FileFindDao instance = new FileFindDao();
-    private static final String fileName = "src/resources/data/books.txt";
+    private static final String fileName = new PropertiesLoader().getBooksFilePath();
     private List<Book> books = new ArrayList<>();
 	
 	private FileFindDao(){}

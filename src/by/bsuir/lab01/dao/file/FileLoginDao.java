@@ -1,8 +1,8 @@
 package by.bsuir.lab01.dao.file;
 
 import by.bsuir.lab01.dao.DaoException;
+import by.bsuir.lab01.dao.file.property.PropertiesLoader;
 import by.bsuir.lab01.helper.FileHelper;
-
 
 import java.io.IOException;
 import java.util.List;
@@ -12,8 +12,7 @@ import java.util.List;
  */
 public final class FileLoginDao implements LoginDao {
     private final static FileLoginDao instance = new FileLoginDao();
-
-    private static String userDataFilePath = "src/resources/data/users.txt";
+    private static String userDataFilePath = new PropertiesLoader().getUserDataFilePath();
 
     private FileLoginDao(){}
 
