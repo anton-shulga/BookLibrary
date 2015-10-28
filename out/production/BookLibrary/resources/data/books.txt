@@ -1,4 +1,3 @@
 C# H.Schildt
 Java H.Schildt
 Thinking_in_java B.Eckel
-Stihi Pushkin
