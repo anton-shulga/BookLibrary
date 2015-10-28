@@ -38,9 +38,10 @@ public final class FileModificationDao implements ModificationDao {
         try {
             List<String> stringBooks = FileHelper.readAllFile(fileName);
             for(String stringBook : stringBooks){
-                if(stringBook.equals(title))
+                if(stringBook.equals(title)){
                     stringBooks.remove(stringBooks.indexOf(stringBook));
-                break;
+                    break;
+                }
             }
             FileHelper.clearFile(fileName);
             for (String stringBook : stringBooks)
