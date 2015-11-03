@@ -14,12 +14,17 @@ public class ConsoleHelper {
         System.out.println(text);
     }
 
-    public static String read() throws IOException {
-        String text = reader.readLine();
-        return text;
+    public static String read()  {
+        try {
+            String text = reader.readLine();
+            return text;
+        }catch (IOException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
-    public static int readInt() throws IOException {
+    public static int readInt() {
         String text = read();
         return Integer.parseInt(text.trim());
     }

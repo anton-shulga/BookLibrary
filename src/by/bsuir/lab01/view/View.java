@@ -21,23 +21,19 @@ public class View {
         ConsoleHelper.write("Hello! It's your console book library!");
 
         do {
-            try {
-                ConsoleHelper.write("Enter your login and password:");
-                LoginRequest request = new LoginRequest();
-                request.setUserData(ConsoleHelper.read());
-                request.setCommandName(CommandName.LOGIN_USER.toString());
-                Response response = controller.executeRequest(request);
+            ConsoleHelper.write("Enter your login and password:");
+            LoginRequest request = new LoginRequest();
+            request.setUserData(ConsoleHelper.read());
+            request.setCommandName(CommandName.LOGIN_USER.toString());
+            Response response = controller.executeRequest(request);
 
-                if (response.getErrorMessage() != null) {
-                    ConsoleHelper.write(response.getErrorMessage());
-                } else {
-                    LoginResponse loginResponse = (LoginResponse) response;
-                    isAdmin = loginResponse.isAdmin();
-                    ConsoleHelper.write(loginResponse.getResultMessage());
-                    isExecuted = true;
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (response.getErrorMessage() != null) {
+                ConsoleHelper.write(response.getErrorMessage());
+            } else {
+                LoginResponse loginResponse = (LoginResponse) response;
+                isAdmin = loginResponse.isAdmin();
+                ConsoleHelper.write(loginResponse.getResultMessage());
+                isExecuted = true;
             }
         } while (!isExecuted);
 
@@ -120,12 +116,8 @@ public class View {
         RemoveBookRequest request = new RemoveBookRequest();
         request.setCommandName(commandName.toString());
 
-        try {
-            ConsoleHelper.write("Enter title and author of book:");
-            request.setTitle(ConsoleHelper.read());
-        } catch (IOException e) {
-            ConsoleHelper.write("Enter correct title " + e);
-        }
+        ConsoleHelper.write("Enter title and author of book:");
+        request.setTitle(ConsoleHelper.read());
         Response response = controller.executeRequest(request);
         if(response.getErrorMessage() != null)
             ConsoleHelper.write(response.getErrorMessage());
@@ -139,12 +131,8 @@ public class View {
     {
         NewBookRequest request = new NewBookRequest();
         request.setCommandName(commandName.toString());
-        try {
-            ConsoleHelper.write("Enter title and author of book:");
-            request.setTitle(ConsoleHelper.read());
-        } catch (IOException e) {
-            ConsoleHelper.write("Enter correct title " + e);
-        }
+        ConsoleHelper.write("Enter title and author of book:");
+        request.setTitle(ConsoleHelper.read());
 
         Response response = controller.executeRequest(request);
         if(response.getErrorMessage() != null)
@@ -161,17 +149,14 @@ public class View {
         FindBookRequest request = new FindBookRequest();
         request.setCommandName(commandName.toString());
 
-        try {
-            request.setAuthor(ConsoleHelper.read());
-        } catch (IOException e) {
-            ConsoleHelper.write("Enter correct author " + e);
-        }
+        request.setAuthor(ConsoleHelper.read());
 
         Response response = controller.executeRequest(request);
         if (response.getErrorMessage() != null)
             ConsoleHelper.write(response.getErrorMessage());
         else {
             FindBookResponse findBookResponse = (FindBookResponse) response;
+            ConsoleHelper.write("Found " + findBookResponse.getBooks().size() + " books: ");
             for(Book book : findBookResponse.getBooks()){
                 ConsoleHelper.write("Title: " + book.getTitle() + " - " + "Author: " + book.getAuthor());
             }

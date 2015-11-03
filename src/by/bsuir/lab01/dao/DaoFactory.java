@@ -15,7 +15,6 @@ public abstract class DaoFactory {
 		}
 		return null;
 	}
-	
 
 	public abstract FindDao getFindDao();
 	public abstract ModificationDao getModificationDao();
