@@ -34,6 +34,7 @@ public class FileShowBooksDao implements ShowBooksDao {
         } catch (IOException e) {
             throw new DaoException("Dao exception " + e.getMessage());
         }
+
         return response;
     }
 }

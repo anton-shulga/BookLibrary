@@ -1,5 +1,5 @@
-C# H.Schildt
+C#
 Java H.Schildt
 Thinking_in_java B.Eckel
-How_to_smoke_spice K.Civako
 How_to_slivat_katki K.Civako
+Mamamama Tatatatat

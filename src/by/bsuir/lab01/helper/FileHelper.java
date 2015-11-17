@@ -12,8 +12,7 @@ public class FileHelper {
         File file = new File(fileName);
 
         try {
-            //проверяем, что если файл не существует то создаем его
-            if(!file.exists()){
+            if (!file.exists()) {
                 file.createNewFile();
             }
             PrintWriter out = new PrintWriter(new OutputStreamWriter(new FileOutputStream(fileName, true)));
@@ -24,7 +23,7 @@ public class FileHelper {
             } finally {
                 out.close();
             }
-        } catch(IOException e) {
+        }catch(IOException e) {
             throw new IOException(e);
         }
     }
