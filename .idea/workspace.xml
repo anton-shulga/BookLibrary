@@ -6,7 +6,8 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f46914b-82f4-45e7-ae0c-ee84cb343641" name="Default" comment="Added Encryption class. Fixed some bugs.">
+    <list default="true" id="6f46914b-82f4-45e7-ae0c-ee84cb343641" name="Default" comment="Fixed some bugs.">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/bsuir/lab01/encryption/Encryptor.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="BookLibrary.iws" />
@@ -1073,7 +1074,13 @@
       <option name="project" value="LOCAL" />
       <updated>1447767769464</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Fixed some bugs.">
+      <created>1447768125523</created>
+      <option name="number" value="00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1447768125523</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1127,7 +1134,8 @@
     <MESSAGE value="Fixed some bugs" />
     <MESSAGE value="Added encryption of passwords. Fixed some bugs." />
     <MESSAGE value="Added Encryption class. Fixed some bugs." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Encryption class. Fixed some bugs." />
+    <MESSAGE value="Fixed some bugs." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed some bugs." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
